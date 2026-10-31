@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0e1018" />
+    <meta name="description" content="CineBook — a cinematic movie ticket booking simulator." />
+    <title>CineBook — Movie Ticket Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="CineBook home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand-name">cine<span>book</span></span>
+        </a>
+        <div class="topbar-meta">
+          <span class="live-dot"><i></i> Live booking simulator</span>
+          <button class="icon-button" id="resetDemo" title="Reset demo data" aria-label="Reset demo data">↻</button>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> Friday night / 7:30 PM</div>
+            <h1>Your seat is<br /><em>waiting.</em></h1>
+            <p class="hero-intro">Make tonight feel like a premiere. Pick your view, bring your people, and let the lights go down.</p>
+            <div class="hero-actions">
+              <a class="text-link" href="#seat-map">Choose a seat <span>↓</span></a>
+              <span class="hero-note">One ticket · Rs. 150</span>
+            </div>
+          </div>
+
+          <div class="film-card">
+            <div class="film-poster">
+              <div class="poster-glow"></div>
+              <div class="poster-orbit orbit-a"></div>
+              <div class="poster-orbit orbit-b"></div>
+              <div class="poster-stars"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="poster-copy">
+                <span class="poster-kicker">A new kind of night</span>
+                <strong>After<br />the <b>rain</b></strong>
+                <span class="poster-footer">A film by A. Mehta <small>2025</small></span>
+              </div>
+              <span class="poster-rating">U/A <small>2h 18m</small></span>
+            </div>
+            <div class="film-info">
+              <div>
+                <span class="section-label">Now showing</span>
+                <h2>After the Rain</h2>
+                <p>Drama&nbsp; · &nbsp;Hindi&nbsp; · &nbsp;English subtitles</p>
+              </div>
+              <span class="film-arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-row" aria-label="Booking overview">
+          <div class="stat-card">
+            <span class="stat-label">Available seats</span>
+            <strong id="availableCount">25</strong>
+            <span class="stat-caption">of 25 total</span>
+          </div>
+          <div class="stat-card accent-stat">
+            <span class="stat-label">Ticket price</span>
+            <strong>Rs. 150</strong>
+            <span class="stat-caption">per person</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Tonight's energy</span>
+            <strong id="bookedCount">0 <small>booked</small></strong>
+            <span class="stat-caption">seats finding their story</span>
+          </div>
+          <div class="algorithm-chip">
+            <span class="chip-symbol">◎</span>
+            <span><b>Powered by simple ideas</b><small>array · queue · stack · list</small></span>
+          </div>
+        </section>
+
+        <section class="booking-layout">
+          <div class="seating-panel panel" id="seat-map">
+            <div class="panel-heading">
+              <div>
+                <span class="section-label">01 / Find your view</span>
+                <h2>Choose a seat</h2>
+              </div>
+              <span class="seat-count-label"><span id="selectedSeatLabel">No seat selected</span></span>
+            </div>
+
+            <div class="screen-wrap">
+              <div class="screen-glow"></div>
+              <div class="screen"><span>screen</span></div>
+              <p>Every seat has a story</p>
+            </div>
+
+            <div class="seat-map-wrap" aria-label="5 by 5 cinema seat layout">
+              <div class="seat-number-row" aria-hidden="true"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+              <div id="seatGrid" class="seat-grid"></div>
+            </div>
+
+            <div class="legend">
+              <span><i class="legend-seat available"></i> Available</span>
+              <span><i class="legend-seat selected"></i> Selected</span>
+              <span><i class="legend-seat booked"></i> Booked</span>
+            </div>
+          </div>
+
+          <aside class="right-column">
+            <div class="booking-card panel">
+              <div class="panel-heading compact">
+                <div>
+                  <span class="section-label">02 / Make it yours</span>
+                  <h2>Reserve your night</h2>
+                </div>
+                <span class="price-tag">Rs. 150</span>
+              </div>
+              <form id="bookingForm" novalidate>
+                <label class="field-label" for="customerName">Your name</label>
+                <div class="input-wrap">
+                  <span class="field-icon">✦</span>
+                  <input id="customerName" name="customerName" autocomplete="name" placeholder="Who should we write this for?" />
+                </div>
+                <div class="form-split">
+                  <div>
+                    <label class="field-label" for="rowInput">Row</label>
+                    <div class="select-wrap"><select id="rowInput" name="row"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select></div>
+                  </div>
+                  <div>
+                    <label class="field-label" for="seatInput">Seat</label>
+                    <div class="select-wrap"><select id="seatInput" name="seat"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+                  </div>
+                </div>
+                <div class="selection-summary" id="selectionSummary">
+                  <span class="summary-icon">+</span>
+                  <span>Select a seat on the map<br /><small>or use the row and seat selectors</small></span>
+                </div>
+                <button class="primary-button" type="submit">Book this seat <span>→</span></button>
+              </form>
+              <p class="secure-note"><span>◆</span> No payment required — this is a simulator</p>
+              <div id="statusMessage" class="status-message" role="status" aria-live="polite"></div>
+            </div>
+
+            <div class="latest-card panel" id="latestBooking">
+              <div class="latest-heading"><span class="section-label">03 / Your latest</span><span class="latest-pulse"></span></div>
+              <div id="latestContent" class="latest-content empty-latest">
+                <span class="latest-placeholder">Your most recent booking<br />will appear here.</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="bookings-section panel" id="confirmedBookings">
+          <div class="panel-heading bookings-heading">
+            <div>
+              <span class="section-label">04 / The guest list</span>
+              <h2>Confirmed bookings</h2>
+            </div>
+            <span class="booking-count" id="bookingCountLabel">0 reservations</span>
+          </div>
+          <div id="bookingsList" class="bookings-list"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>cine<span>book</span> / movie ticket booking simulator</span>
+        <span>Built around a 5 × 5 seat map</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
